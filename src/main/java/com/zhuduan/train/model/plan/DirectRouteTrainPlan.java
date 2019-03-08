@@ -1,11 +1,11 @@
-package com.zhuduan.test.train.model.plan;
+package com.zhuduan.train.model.plan;
 
-import com.zhuduan.test.train.constant.EnumStation;
+import com.zhuduan.train.constant.EnumStation;
 
 import java.util.List;
 
 /**
- * purpose of this class
+ * The plan contains tour route
  *
  * @author Haifeng.Zhu
  * created at 3/8/19
@@ -13,7 +13,15 @@ import java.util.List;
 public class DirectRouteTrainPlan extends TrainPlan{
     
     private List<EnumStation> route;
-    
+
+    @Override
+    public Boolean isValid() {
+        if (route==null || route.size()<=1){
+            return false;
+        }
+        return super.isValid();
+    }
+
     public List<EnumStation> getRoute() {
         return route;
     }

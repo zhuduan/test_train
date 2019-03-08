@@ -1,4 +1,4 @@
-package com.zhuduan.test.train.constant;
+package com.zhuduan.train.constant;
 
 /**
  * the type of plan

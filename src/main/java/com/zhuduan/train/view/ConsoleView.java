@@ -1,4 +1,4 @@
-package com.zhuduan.test.train.view;
+package com.zhuduan.train.view;
 
 /**
  * render the result to console

@@ -1,9 +1,8 @@
-package com.zhuduan.test.train.model.plan;
+package com.zhuduan.train.model.plan;
 
 
-import com.zhuduan.test.train.constant.EnumPlanType;
-import com.zhuduan.test.train.constant.EnumStation;
-import com.zhuduan.test.train.model.schedule.AbstractTrainSchedule;
+import com.zhuduan.train.constant.EnumStation;
+import com.zhuduan.train.model.schedule.TrainSchedule;
 
 /**
  * the plan need to get some suggestions
@@ -13,28 +12,30 @@ import com.zhuduan.test.train.model.schedule.AbstractTrainSchedule;
  */
 public class TrainPlan {
 
-    private EnumPlanType planType;
-    private AbstractTrainSchedule trainSchedule;
-
+    private TrainSchedule trainSchedule;
     private EnumStation startStation;
     private EnumStation endStation;
 
     public TrainPlan() {
     }
 
-    public EnumPlanType getPlanType() {
-        return planType;
+    /***
+     * check if the schedule and start/end station is valid
+     * 
+     * @return true if data is valid, or false
+     */
+    public Boolean isValid(){
+        if (startStation==null || endStation==null){
+            return false;
+        }
+        return trainSchedule.isValid();
     }
 
-    public void setPlanType(EnumPlanType planType) {
-        this.planType = planType;
-    }
-
-    public AbstractTrainSchedule getTrainSchedule() {
+    public TrainSchedule getTrainSchedule() {
         return trainSchedule;
     }
 
-    public void setTrainSchedule(AbstractTrainSchedule trainSchedule) {
+    public void setTrainSchedule(TrainSchedule trainSchedule) {
         this.trainSchedule = trainSchedule;
     }
 

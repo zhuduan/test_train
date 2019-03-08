@@ -1,4 +1,4 @@
-package com.zhuduan.test.train.constant;
+package com.zhuduan.train.constant;
 
 /**
  * purpose of this class
@@ -10,7 +10,9 @@ public enum ErrorCode {
     
     NO_SUCH_ROUTE(1, "NO SUCH ROUTE"),
     ILLAGEL_TRAIN_PLAN(2, "Illegal train plan."),
-    UNSUPPORTED_TRAIN_PLAN(3, "Not support this train plan.");
+    UNSUPPORTED_TRAIN_PLAN(3, "Not support this train plan."),
+    INVALID_TRAIN_PLAN(4, "Invalid train plan."),
+    INVALID_ROUTE_INFO(5, "Invalid Route information.");
     
     
     private Integer id;
