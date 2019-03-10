@@ -1,8 +1,11 @@
 package com.zhuduan.train.model.schedule;
 
 import com.zhuduan.train.constant.DefaultSetting;
-import com.zhuduan.train.constant.EnumStation;
+import com.zhuduan.train.constant.ErrorCode;
 import com.zhuduan.train.exception.DataException;
+import com.zhuduan.train.model.station.TrainStation;
+
+import java.util.List;
 
 /**
  * the parent of all TrainSchedules
@@ -14,11 +17,10 @@ import com.zhuduan.train.exception.DataException;
  */
 public abstract class TrainSchedule {
 
-    private Integer[][] adjacentMatrix;
+    protected Integer[][] adjacentMatrix;
+    protected List<TrainStation> allStations;
     
-    public TrainSchedule() throws DataException {
-        // should generate the matrix firstly
-        generateAdjacentMatrix();
+    public TrainSchedule(){
     }
 
     /**
@@ -32,12 +34,39 @@ public abstract class TrainSchedule {
     }
 
     /***
+     * get all stations
+     *
+     * @return
+     */
+    public List<TrainStation> getAllStations() {
+        return allStations;
+    }
+
+    /***
+     * if the station is already in the station list
+     *
+     * @param name
+     * @return
+     */
+    public Boolean containsStation(String name){
+        return allStations.stream().anyMatch( existed -> existed.getName().equals(name));
+    }
+
+    public TrainStation getStationByName(String name){
+        return allStations.stream().filter( station -> station.getName().equals(name) ).findFirst().get();
+    }
+
+    /***
      * check if the data is valid
      *
      * @return
      */
     public Boolean isValid() {
         if (adjacentMatrix == null) {
+            return false;
+        }
+
+        if (allStations == null){
             return false;
         }
         return true;
@@ -51,15 +80,13 @@ public abstract class TrainSchedule {
         return adjacentMatrix[startIndex][endIndex];
     }
 
-    public Integer getLengthBetween(EnumStation startStation, EnumStation endStation) {
+    public Integer getLengthBetween(TrainStation startStation, TrainStation endStation) {
         return getLengthBetween(startStation.getIndex(), endStation.getIndex());
     }
 
-    /***
-     *  generate the adjacent matrix
-     *      the sub class will decide the way to get the matrix 
-     * 
-     * @throws DataException when input data error or the generate matrix failed
-     */
-    public abstract void generateAdjacentMatrix() throws DataException ;
+    public Integer getLengthBetween(String startName, String endName) {
+        return getLengthBetween(getStationByName(startName), getStationByName(endName));
+    }
+
+    protected abstract void generateScheduleInfo() throws DataException ;
 }

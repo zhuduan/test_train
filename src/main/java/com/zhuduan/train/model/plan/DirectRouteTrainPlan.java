@@ -1,6 +1,8 @@
 package com.zhuduan.train.model.plan;
 
-import com.zhuduan.train.constant.EnumStation;
+import com.zhuduan.train.constant.EnumSuggestionType;
+import com.zhuduan.train.model.schedule.TrainSchedule;
+import com.zhuduan.train.model.station.TrainStation;
 
 import java.util.List;
 
@@ -12,7 +14,16 @@ import java.util.List;
  */
 public class DirectRouteTrainPlan extends TrainPlan{
     
-    private List<EnumStation> route;
+    private List<TrainStation> route;
+
+    public DirectRouteTrainPlan() {
+    }
+
+    public DirectRouteTrainPlan(TrainSchedule trainSchedule, TrainStation startStation, TrainStation endStation,
+                                List<TrainStation> route, EnumSuggestionType suggestionType) {
+        super(trainSchedule, startStation, endStation, suggestionType);
+        this.route = route;
+    }
 
     @Override
     public Boolean isValid() {
@@ -22,11 +33,11 @@ public class DirectRouteTrainPlan extends TrainPlan{
         return super.isValid();
     }
 
-    public List<EnumStation> getRoute() {
+    public List<TrainStation> getRoute() {
         return route;
     }
 
-    public void setRoute(List<EnumStation> route) {
+    public void setRoute(List<TrainStation> route) {
         this.route = route;
     }
 }

@@ -1,8 +1,9 @@
 package com.zhuduan.train.model.plan;
 
 
-import com.zhuduan.train.constant.EnumStation;
+import com.zhuduan.train.constant.EnumSuggestionType;
 import com.zhuduan.train.model.schedule.TrainSchedule;
+import com.zhuduan.train.model.station.TrainStation;
 
 /**
  * the plan need to get some suggestions
@@ -13,10 +14,19 @@ import com.zhuduan.train.model.schedule.TrainSchedule;
 public class TrainPlan {
 
     private TrainSchedule trainSchedule;
-    private EnumStation startStation;
-    private EnumStation endStation;
+    private TrainStation startStation;
+    private TrainStation endStation;
+    private EnumSuggestionType suggestionType;
 
     public TrainPlan() {
+    }
+
+    public TrainPlan(TrainSchedule trainSchedule, TrainStation startStation,
+                     TrainStation endStation, EnumSuggestionType suggestionType) {
+        this.trainSchedule = trainSchedule;
+        this.startStation = startStation;
+        this.endStation = endStation;
+        this.suggestionType = suggestionType;
     }
 
     /***
@@ -39,19 +49,27 @@ public class TrainPlan {
         this.trainSchedule = trainSchedule;
     }
 
-    public EnumStation getStartStation() {
+    public TrainStation getStartStation() {
         return startStation;
     }
 
-    public void setStartStation(EnumStation startStation) {
+    public void setStartStation(TrainStation startStation) {
         this.startStation = startStation;
     }
 
-    public EnumStation getEndStation() {
+    public TrainStation getEndStation() {
         return endStation;
     }
 
-    public void setEndStation(EnumStation endStation) {
+    public void setEndStation(TrainStation endStation) {
         this.endStation = endStation;
+    }
+
+    public EnumSuggestionType getSuggestionType() {
+        return suggestionType;
+    }
+
+    public void setSuggestionType(EnumSuggestionType suggestionType) {
+        this.suggestionType = suggestionType;
     }
 }

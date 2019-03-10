@@ -14,10 +14,11 @@ public class FileTrainSchedule extends TrainSchedule {
 
     public FileTrainSchedule(String fileUrl) throws DataException {
         this.fileUrl = fileUrl;
+        generateScheduleInfo();
     }
 
     @Override
-    public void generateAdjacentMatrix() {
+    protected void generateScheduleInfo() {
         // todo: 
     }
 }

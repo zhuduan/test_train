@@ -19,4 +19,17 @@ public class UtilTool {
     public static Boolean isEqualInteger(Integer source, Integer target){
         return source.intValue() == target.intValue();
     }
+
+    /***
+     * check the number is not a negative number or null
+     *
+     * @param number
+     * @return true if number is not null and not less than 0
+     */
+    public static Boolean isNotNegative(Integer number){
+        if (number==null || number<0){
+            return false;
+        }
+        return true;
+    }
 }
