@@ -1,5 +1,7 @@
 package com.zhuduan.train.model.station;
 
+import com.zhuduan.train.util.UtilTool;
+
 public class TrainStation {
 
     private Integer index;
@@ -10,6 +12,18 @@ public class TrainStation {
         this.index = index;
         this.name = name;
         this.alias = alias;
+    }
+
+    /***
+     * judge is the same station by name
+     * @param name
+     * @return
+     */
+    public Boolean isSameByName(String name){
+        if (name.equals(this.name)){
+            return true;
+        }
+        return false;
     }
 
     public Integer getIndex() {

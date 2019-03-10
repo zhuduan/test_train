@@ -2,7 +2,6 @@ package com.zhuduan.train.model.schedule;
 
 import com.zhuduan.train.constant.DefaultSetting;
 import com.zhuduan.train.exception.DataException;
-import org.junit.Rule;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

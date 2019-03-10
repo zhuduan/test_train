@@ -49,11 +49,16 @@ public abstract class TrainSchedule {
      * @return
      */
     public Boolean containsStation(String name){
-        return allStations.stream().anyMatch( existed -> existed.getName().equals(name));
+        return allStations.stream().anyMatch( existed -> existed.isSameByName(name));
     }
 
+    /***
+     * get the station by name
+     * @param name
+     * @return
+     */
     public TrainStation getStationByName(String name){
-        return allStations.stream().filter( station -> station.getName().equals(name) ).findFirst().get();
+        return allStations.stream().filter( station -> station.isSameByName(name) ).findFirst().get();
     }
 
     /***

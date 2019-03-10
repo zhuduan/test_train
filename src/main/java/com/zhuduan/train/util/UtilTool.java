@@ -32,4 +32,16 @@ public class UtilTool {
         }
         return true;
     }
+
+    /***
+     *
+     * @param number
+     * @return
+     */
+    public static Boolean isPositive(Integer number){
+        if (number!=null && number>0){
+            return true;
+        }
+        return false;
+    }
 }
