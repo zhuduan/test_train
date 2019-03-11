@@ -32,6 +32,14 @@ public class TrainPlanTest {
     }
 
     @Test
-    public void testIsValid() {
+    public void testIsValid() throws Exception {
+        TrainSchedule schedule = TestUtil.getTestSchedule();
+        TrainPlan plan = new TrainPlan(schedule, null, schedule.getStationByName("C"), 
+                EnumSuggestionType.POSSIBLE_TRIPS_EXACT_STOP);
+        assertFalse(plan.isValid());
+
+        plan = new TrainPlan(schedule, schedule.getStationByName("A"), schedule.getStationByName("C"),
+                EnumSuggestionType.POSSIBLE_TRIPS_EXACT_STOP);
+        assertTrue(plan.isValid());
     }
 }

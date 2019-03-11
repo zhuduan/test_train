@@ -9,7 +9,7 @@
 
 ### java parameters
 1. file --- the IOType name, will decide which ways to read the input data
-2. /Users/hzhu2/Documents/workspace/test_train/input.txt --- input file url
+2. /Users/hzhu2/Documents/workspace/test_train/input.txt --- input file url (file should only contains one line graph info)
 
 ---
 
