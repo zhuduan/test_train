@@ -36,7 +36,6 @@ public class StringTrainSchedule extends TrainSchedule{
         }
 
         String actualRoute = routeData.replace(ROUTE_PREFIX, StringUtils.EMPTY).trim();
-
         // should generate the station list before the matrix
         generateStationList(actualRoute);
         generateMatrix(actualRoute);

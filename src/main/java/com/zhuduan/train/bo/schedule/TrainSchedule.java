@@ -6,6 +6,7 @@ import com.zhuduan.train.exception.DataException;
 import com.zhuduan.train.bo.station.TrainStation;
 import com.zhuduan.train.util.UtilTool;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -194,5 +195,5 @@ public abstract class TrainSchedule {
         return routeLength;
     }
 
-    protected abstract void generateScheduleInfo() throws DataException ;
+    protected abstract void generateScheduleInfo() throws  DataException, IOException;
 }

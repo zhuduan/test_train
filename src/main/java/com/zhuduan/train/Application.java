@@ -11,8 +11,6 @@ import com.zhuduan.train.calculator.Calculator;
 import com.zhuduan.train.calculator.CalculatorFactory;
 import com.zhuduan.train.constant.EnumIOType;
 import com.zhuduan.train.constant.EnumSuggestionType;
-import com.zhuduan.train.constant.ErrorCode;
-import com.zhuduan.train.exception.ParamException;
 import com.zhuduan.train.view.View;
 import com.zhuduan.train.view.ViewFactory;
 
@@ -24,10 +22,7 @@ public class Application {
 
     public static void main(String[] args) throws Exception{
         // 1. read the args, and generate schedule
-        if (args ==null || args.length<2){
-            throw new ParamException(ErrorCode.INVALID_PARAMS);
-        }
-        TrainSchedule schedule = ScheduleFactory.generateTrainSchedule(EnumIOType.getIOType(args[0]), args[1]);
+        TrainSchedule schedule = ScheduleFactory.generateTrainSchedule(args);
         
         // 2. generate plan as request
         List<TrainPlan> planList = generateTrainPlan(schedule);
