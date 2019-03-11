@@ -28,3 +28,8 @@
 ---
 
 # design description
+1. Use TrainSchedule to describe the node and path (and can generate from file or string according to java args)
+2. Use TrainPlan to describe the questions needed to calculate
+3. Use Suggestion to describe the answers
+4. Use Calculator to do the operation (input TrainPlan and output Suggestion)
+5. Use View to show the suggestion to customer (can expand to several different ways)
