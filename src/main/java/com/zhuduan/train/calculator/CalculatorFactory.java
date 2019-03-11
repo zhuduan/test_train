@@ -7,8 +7,8 @@ import com.zhuduan.train.exception.TypeException;
 public class CalculatorFactory {
 
     // the `stop` and `length` type may can be exacted with strategy pattern if needed
-    public static Calculator getCalculator(EnumSuggestionType suggestionType) throws Exception{
-        switch (suggestionType){
+    public static Calculator getCalculator(EnumSuggestionType suggestionType) throws Exception {
+        switch (suggestionType) {
             case MIN_ROUTE:
                 return new MinLengthRouteCalculator();
             case DIRECT_ROUTE:

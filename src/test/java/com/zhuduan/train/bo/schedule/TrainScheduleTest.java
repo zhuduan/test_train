@@ -22,7 +22,7 @@ import static org.mockito.Mockito.when;
  * created at 3/10/19
  */
 public class TrainScheduleTest {
-    
+
     private TrainSchedule schedule;
 
     @Before
@@ -32,8 +32,8 @@ public class TrainScheduleTest {
 
     @Test
     public void testContainsStation() {
-        assertTrue(schedule.containsStation("A"));   
-        assertFalse(schedule.containsStation("F"));   
+        assertTrue(schedule.containsStation("A"));
+        assertFalse(schedule.containsStation("F"));
     }
 
     @Test
@@ -65,13 +65,13 @@ public class TrainScheduleTest {
     }
 
     @Test
-    public void testGetTripsWithAllStations()  throws DataException {
+    public void testGetTripsWithAllStations() throws DataException {
         List<List<TrainStation>> trips = schedule.getTripsWithAllStations();
-        assertEquals(schedule.getAllStations().size(),trips.size());
+        assertEquals(schedule.getAllStations().size(), trips.size());
     }
 
     @Test
-    public void testIncreaseTrip()  throws DataException  {
+    public void testIncreaseTrip() throws DataException {
         TrainStation start = schedule.getStationByName("A");
 
         List<List<TrainStation>> trips = schedule.increaseTrip(schedule.getTripWithStation(start));   // AB, AD, AE

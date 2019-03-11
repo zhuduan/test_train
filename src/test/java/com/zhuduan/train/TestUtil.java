@@ -44,21 +44,21 @@ public class TestUtil {
         when(trainSchedule.getLengthBetween(stationC, stationE)).thenReturn(2);
         when(trainSchedule.getLengthBetween(stationE, stationB)).thenReturn(3);
         when(trainSchedule.getLengthBetween(stationA, stationE)).thenReturn(7);
-        
+
         when(trainSchedule.getAdjacentMatrix()).thenReturn(getAdjacentMatrix());
         
         when(trainSchedule.getTripLength(any(List.class))).thenCallRealMethod();
         when(trainSchedule.getTripsWithAllStations()).thenCallRealMethod();
         when(trainSchedule.getTripWithStation(any(TrainStation.class))).thenCallRealMethod();
         when(trainSchedule.increaseTrip(any(List.class))).thenCallRealMethod();
-        
+
         return trainSchedule;
     }
-    
-    private static Integer[][] getAdjacentMatrix(){
+
+    private static Integer[][] getAdjacentMatrix() {
         Integer[][] matrix = new Integer[5][5];
         UtilTool.fillIntMatrix(matrix, DefaultSetting.UNREACHABLE);
-        
+
         // initial data
         matrix[0][1] = 5;
         matrix[1][2] = 4;
@@ -69,7 +69,7 @@ public class TestUtil {
         matrix[2][4] = 2;
         matrix[4][1] = 3;
         matrix[0][4] = 7;
-        
+
         return matrix;
     }
 }

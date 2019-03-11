@@ -17,7 +17,7 @@ public class StopsTrainPlan extends TrainPlan {
 
     @Override
     public Boolean isValid() {
-        if (!UtilTool.isPositive(stopNumber)){
+        if (!UtilTool.isPositive(stopNumber)) {
             return false;
         }
         return super.isValid();

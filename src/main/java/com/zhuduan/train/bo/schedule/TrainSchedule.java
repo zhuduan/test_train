@@ -22,8 +22,8 @@ public abstract class TrainSchedule {
 
     protected Integer[][] adjacentMatrix;
     protected List<TrainStation> allStations;
-    
-    public TrainSchedule(){
+
+    public TrainSchedule() {
     }
 
     /**
@@ -51,8 +51,8 @@ public abstract class TrainSchedule {
      * @param name
      * @return
      */
-    public Boolean containsStation(String name){
-        return allStations.stream().anyMatch( existed -> existed.isSameByName(name));
+    public Boolean containsStation(String name) {
+        return allStations.stream().anyMatch(existed -> existed.isSameByName(name));
     }
 
     /***
@@ -60,8 +60,8 @@ public abstract class TrainSchedule {
      * @param name
      * @return
      */
-    public TrainStation getStationByName(String name){
-        return allStations.stream().filter( station -> station.isSameByName(name) ).findFirst().get();
+    public TrainStation getStationByName(String name) {
+        return allStations.stream().filter(station -> station.isSameByName(name)).findFirst().get();
     }
 
     /***
@@ -74,7 +74,7 @@ public abstract class TrainSchedule {
             return false;
         }
 
-        if (allStations == null){
+        if (allStations == null) {
             return false;
         }
         return true;
@@ -82,13 +82,13 @@ public abstract class TrainSchedule {
 
     /***
      * get length between two station
-     * 
+     *
      * @param startIndex
      * @param endIndex
      * @return
      */
     public Integer getLengthBetween(Integer startIndex, Integer endIndex) {
-        if ( startIndex> adjacentMatrix.length || endIndex> adjacentMatrix[0].length){
+        if (startIndex > adjacentMatrix.length || endIndex > adjacentMatrix[0].length) {
             return DefaultSetting.UNREACHABLE;
         }
         return adjacentMatrix[startIndex][endIndex];
@@ -96,7 +96,7 @@ public abstract class TrainSchedule {
 
     /***
      * get length between two station
-     * 
+     *
      * @param startStation
      * @param endStation
      * @return
@@ -107,7 +107,7 @@ public abstract class TrainSchedule {
 
     /***
      * get length between two station
-     * 
+     *
      * @param startName
      * @param endName
      * @return
@@ -121,9 +121,9 @@ public abstract class TrainSchedule {
      *
      * @return
      */
-    public List<List<TrainStation>> getTripsWithAllStations() throws DataException{
+    public List<List<TrainStation>> getTripsWithAllStations() throws DataException {
         List<List<TrainStation>> trips = new ArrayList<>();
-        for (TrainStation trainStation : getAllStations()){
+        for (TrainStation trainStation : getAllStations()) {
             trips.add(getTripWithStation(trainStation));
         }
         return trips;
@@ -136,8 +136,8 @@ public abstract class TrainSchedule {
      * @return
      * @throws DataException
      */
-    public List<TrainStation> getTripWithStation(TrainStation start) throws DataException{
-        if (start==null){
+    public List<TrainStation> getTripWithStation(TrainStation start) throws DataException {
+        if (start == null) {
             throw new DataException(ErrorCode.INVALID_ROUTE_INFO);
         }
 
@@ -155,17 +155,17 @@ public abstract class TrainSchedule {
      * @return trip list, means all the trip can start from current station to next station
      * @throws DataException
      */
-    public List<List<TrainStation>> increaseTrip(List<TrainStation> trip) throws DataException{
-        if (trip==null){
+    public List<List<TrainStation>> increaseTrip(List<TrainStation> trip) throws DataException {
+        if (trip == null) {
             throw new DataException(ErrorCode.INVALID_ROUTE_INFO);
         }
 
         List<List<TrainStation>> increasedTrips = new ArrayList<>();
 
         TrainStation currentStation = trip.get(trip.size() - 1);
-        getAllStations().forEach( nextStation ->{
+        getAllStations().forEach(nextStation -> {
             Integer routeLength = getLengthBetween(currentStation, nextStation);
-            if (!UtilTool.isEqualInteger(routeLength, DefaultSetting.UNREACHABLE)){
+            if (!UtilTool.isEqualInteger(routeLength, DefaultSetting.UNREACHABLE)) {
                 List<TrainStation> newTrip = new ArrayList<>();
                 newTrip.addAll(trip);
                 newTrip.add(nextStation);
@@ -183,17 +183,17 @@ public abstract class TrainSchedule {
      * @return
      * @throws DataException
      */
-    public Integer getTripLength(List<TrainStation> trip) throws DataException{
-        if (trip==null){
+    public Integer getTripLength(List<TrainStation> trip) throws DataException {
+        if (trip == null) {
             throw new DataException(ErrorCode.INVALID_ROUTE_INFO);
         }
 
         Integer routeLength = 0;
-        for(int i=0; i<trip.size()-1; i++){
-            routeLength = routeLength + getLengthBetween(trip.get(i), trip.get(i+1));
+        for (int i = 0; i < trip.size() - 1; i++) {
+            routeLength = routeLength + getLengthBetween(trip.get(i), trip.get(i + 1));
         }
         return routeLength;
     }
 
-    protected abstract void generateScheduleInfo() throws  DataException, IOException;
+    protected abstract void generateScheduleInfo() throws DataException, IOException;
 }

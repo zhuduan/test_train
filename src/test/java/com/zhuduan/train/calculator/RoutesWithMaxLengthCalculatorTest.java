@@ -84,14 +84,14 @@ public class RoutesWithMaxLengthCalculatorTest {
     }
 
     @Test
-    public void testGetSuggestion() throws Exception{
+    public void testGetSuggestion() throws Exception {
         TrainSchedule schedule = TestUtil.getTestSchedule();
         
-        LengthTrainPlan lengthTrainPlan = new LengthTrainPlan(schedule, schedule.getStationByName("C"), schedule.getStationByName("C"), 
+        LengthTrainPlan lengthTrainPlan = new LengthTrainPlan(schedule, schedule.getStationByName("C"), schedule.getStationByName("C"),
                 30, EnumSuggestionType.POSSIBLE_TRIPS_MAX_LENGTH);
         assertEquals("7", calculator.getSuggestion(lengthTrainPlan).getMessage());
 
-        lengthTrainPlan = new LengthTrainPlan(schedule, schedule.getStationByName("A"), schedule.getStationByName("C"), 
+        lengthTrainPlan = new LengthTrainPlan(schedule, schedule.getStationByName("A"), schedule.getStationByName("C"),
                 15, EnumSuggestionType.POSSIBLE_TRIPS_MAX_LENGTH);
         assertEquals("3", calculator.getSuggestion(lengthTrainPlan).getMessage());
 

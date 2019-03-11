@@ -35,7 +35,7 @@ public class MinLengthRouteCalculatorTest {
     @Test
     public void getSuggestion() throws Exception {
         TrainSchedule schedule = TestUtil.getTestSchedule();
-        
+
         TrainPlan trainPlan = new TrainPlan(schedule, schedule.getStationByName("A"), schedule.getStationByName("C"), EnumSuggestionType.MIN_ROUTE);
         assertEquals("9", calculator.getSuggestion(trainPlan).getMessage());
 

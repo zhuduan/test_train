@@ -17,7 +17,7 @@ public class LengthTrainPlan extends TrainPlan {
 
     @Override
     public Boolean isValid() {
-        if (!UtilTool.isPositive(routeLength)){
+        if (!UtilTool.isPositive(routeLength)) {
             return false;
         }
         return super.isValid();

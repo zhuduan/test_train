@@ -21,7 +21,7 @@ public class MinLengthRouteCalculator implements Calculator {
         }
 
         Integer shortestLength = getShortestLength(trainPlan);
-        if (UtilTool.isEqualInteger(shortestLength, UNREACHABLE)){
+        if (UtilTool.isEqualInteger(shortestLength, UNREACHABLE)) {
             return new Suggestion(ErrorCode.NO_SUCH_ROUTE.getMessage());
         }
         return new Suggestion(String.valueOf(shortestLength));
@@ -45,15 +45,13 @@ public class MinLengthRouteCalculator implements Calculator {
             for (int i = 0; i < matrixSize; i++) {
                 for (int j = 0; j < matrixSize; j++) {
                     // as we use the UNREACHABLE as the biggest, should special dealing here
-                    if (adjacentMatrix[i][k]==UNREACHABLE || adjacentMatrix[k][j]==UNREACHABLE) {
+                    if (adjacentMatrix[i][k] == UNREACHABLE || adjacentMatrix[k][j] == UNREACHABLE) {
                         continue;
-                    }
-                    else if (adjacentMatrix[i][j]==UNREACHABLE){
+                    } else if (adjacentMatrix[i][j] == UNREACHABLE) {
                         adjacentMatrix[i][j] = adjacentMatrix[i][k] + adjacentMatrix[k][j];
                         path[i][j] = k;
                         continue;
-                    }
-                    else if(adjacentMatrix[i][j] > (adjacentMatrix[i][k] + adjacentMatrix[k][j])) {
+                    } else if (adjacentMatrix[i][j] > (adjacentMatrix[i][k] + adjacentMatrix[k][j])) {
                         adjacentMatrix[i][j] = adjacentMatrix[i][k] + adjacentMatrix[k][j];
                         path[i][j] = k;
                     }

@@ -26,7 +26,7 @@ public class TripsWithMaxStopCalculatorTest {
     }
 
     @Test
-    public void getTrips()  throws DataException {
+    public void getTrips() throws DataException {
         TrainSchedule schedule = TestUtil.getTestSchedule();
 
         StopsTrainPlan trainPlan = new StopsTrainPlan(schedule, schedule.getStationByName("C"), schedule.getStationByName("C"), 3, EnumSuggestionType.POSSIBLE_TRIPS_MAX_STOP);
@@ -43,7 +43,7 @@ public class TripsWithMaxStopCalculatorTest {
     }
 
     @Test
-    public void testGetSuggestion() throws Exception{
+    public void testGetSuggestion() throws Exception {
         TrainSchedule schedule = TestUtil.getTestSchedule();
 
         StopsTrainPlan trainPlan = new StopsTrainPlan(schedule, schedule.getStationByName("C"), schedule.getStationByName("C"), 3, EnumSuggestionType.POSSIBLE_TRIPS_MAX_STOP);

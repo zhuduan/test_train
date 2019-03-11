@@ -7,7 +7,7 @@ package com.zhuduan.train.constant;
  * created at 3/8/19
  */
 public enum ErrorCode {
-    
+
     NO_SUCH_ROUTE(1, "NO SUCH ROUTE"),
     ILLAGEL_TRAIN_PLAN(2, "Illegal train plan."),
     UNSUPPORTED_TRAIN_PLAN(3, "Not support this train plan."),
@@ -17,8 +17,8 @@ public enum ErrorCode {
     INVALID_PARAMS(7, "Invalid params."),
     INVALID_FILE_NAME(8, "Invalid file name"),
     NO_SUCH_FILE(9, "No such file");
-    
-    
+
+
     private Integer id;
     private String message;
 

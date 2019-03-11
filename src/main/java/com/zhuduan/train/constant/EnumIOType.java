@@ -9,11 +9,11 @@ import java.util.Arrays;
  * created at 3/10/19
  */
 public enum EnumIOType {
-    
+
     ARG_STRING(1, "argString"),
     FILE(2, "file"),
     CONSOLE_STRING(3, "consoleString");
-    
+
     private int id;
     private String name;
 
@@ -21,11 +21,11 @@ public enum EnumIOType {
         this.id = id;
         this.name = name;
     }
-    
-    public static EnumIOType getIOType(String name){
-        return Arrays.stream(EnumIOType.values()).filter( type -> type.getName().equals(name)).findAny().get();
+
+    public static EnumIOType getIOType(String name) {
+        return Arrays.stream(EnumIOType.values()).filter(type -> type.getName().equals(name)).findAny().get();
     }
-    
+
     public int getId() {
         return id;
     }

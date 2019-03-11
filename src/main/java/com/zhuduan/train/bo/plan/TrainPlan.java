@@ -39,11 +39,11 @@ public class TrainPlan {
 
     /***
      * check if the schedule and start/end station is valid
-     * 
+     *
      * @return true if data is valid, or false
      */
-    public Boolean isValid(){
-        if (startStation==null || endStation==null){
+    public Boolean isValid() {
+        if (startStation == null || endStation == null) {
             return false;
         }
         return trainSchedule.isValid();

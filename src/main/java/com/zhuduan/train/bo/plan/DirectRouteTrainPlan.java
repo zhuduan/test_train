@@ -12,8 +12,8 @@ import java.util.List;
  * @author Haifeng.Zhu
  * created at 3/8/19
  */
-public class DirectRouteTrainPlan extends TrainPlan{
-    
+public class DirectRouteTrainPlan extends TrainPlan {
+
     private List<TrainStation> route;
 
     public DirectRouteTrainPlan() {
@@ -27,7 +27,7 @@ public class DirectRouteTrainPlan extends TrainPlan{
 
     @Override
     public Boolean isValid() {
-        if (route==null || route.size()<=1){
+        if (route == null || route.size() <= 1) {
             return false;
         }
         return super.isValid();

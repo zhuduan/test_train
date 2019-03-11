@@ -16,20 +16,20 @@ public class ScheduleFactory {
     /***
      * generate the schedule according to the input type
      *      notice: default will load `input.txt` as the data file, and using file generator
-     * 
+     *
      * @param args
      * @return
      * @throws Exception
      */
-    public static TrainSchedule generateTrainSchedule(String[] args) throws Exception{
+    public static TrainSchedule generateTrainSchedule(String[] args) throws Exception {
         EnumIOType ioType = EnumIOType.FILE;
         String value = "input.txt";
-        if (args!=null && args.length>=2){
+        if (args != null && args.length >= 2) {
             ioType = EnumIOType.getIOType(args[0]);
             value = args[1];
         }
         
-        switch (ioType){
+        switch (ioType) {
             case ARG_STRING:
                 return new StringTrainSchedule(value);
             case FILE:

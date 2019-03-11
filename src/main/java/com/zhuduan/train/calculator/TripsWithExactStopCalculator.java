@@ -15,10 +15,10 @@ public class TripsWithExactStopCalculator extends TripsWithStopCalculator {
         List<List<TrainStation>> trips = getAllTripsWithStop(plan);
 
         // filter the ones due to condition
-        List<List<TrainStation>> result = trips.stream().filter( trip -> {
-            TrainStation lastStation =  trip.get(trip.size()-1);
+        List<List<TrainStation>> result = trips.stream().filter(trip -> {
+            TrainStation lastStation = trip.get(trip.size() - 1);
             Integer tripSize = plan.getStopNumber() + 1;
-            return (trip.size()==tripSize && lastStation.equals(plan.getEndStation()) );
+            return (trip.size() == tripSize && lastStation.equals(plan.getEndStation()));
         }).collect(Collectors.toList());
         return result.size();
     }

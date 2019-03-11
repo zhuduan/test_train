@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
  */
 public class FileTrainScheduleTest {
     @Test
-    public void testConstructor() throws DataException,IOException {
+    public void testConstructor() throws DataException, IOException {
         String fileName = "input.txt";
         FileTrainSchedule trainSchedule = new FileTrainSchedule(fileName);
         assertEquals(5, trainSchedule.getLengthBetween("A", "B").intValue());

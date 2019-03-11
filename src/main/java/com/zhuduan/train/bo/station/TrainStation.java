@@ -17,8 +17,8 @@ public class TrainStation {
      * @param name
      * @return
      */
-    public Boolean isSameByName(String name){
-        if (name.equals(this.name)){
+    public Boolean isSameByName(String name) {
+        if (name.equals(this.name)) {
             return true;
         }
         return false;

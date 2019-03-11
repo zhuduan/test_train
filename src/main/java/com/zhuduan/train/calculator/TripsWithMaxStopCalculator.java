@@ -15,7 +15,7 @@ public class TripsWithMaxStopCalculator extends TripsWithStopCalculator {
         List<List<TrainStation>> trips = getAllTripsWithStop(trainPlan);
 
         // filter the result
-        List<List<TrainStation>> result = trips.stream().filter( trip ->{
+        List<List<TrainStation>> result = trips.stream().filter(trip -> {
             TrainStation tripEnd = trip.get(trip.size() - 1);
             return tripEnd.equals(trainPlan.getEndStation());
         }).collect(Collectors.toList());

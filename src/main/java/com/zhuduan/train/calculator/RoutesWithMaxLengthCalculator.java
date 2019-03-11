@@ -18,7 +18,7 @@ public class RoutesWithMaxLengthCalculator implements Calculator {
 
     @Override
     public Suggestion getSuggestion(TrainPlan trainPlan) throws Exception {
-        if (trainPlan instanceof LengthTrainPlan){
+        if (trainPlan instanceof LengthTrainPlan) {
             LengthTrainPlan lengthTrainPlan = (LengthTrainPlan) trainPlan;
             if (!lengthTrainPlan.isValid()) {
                 return new Suggestion(ErrorCode.INVALID_TRAIN_PLAN.getMessage());
@@ -29,24 +29,24 @@ public class RoutesWithMaxLengthCalculator implements Calculator {
         }
         return new Suggestion(ErrorCode.ILLAGEL_TRAIN_PLAN.getMessage());
     }
-    
+
     private Integer getTrips(LengthTrainPlan trainPlan) throws DataException {
         TrainSchedule schedule = trainPlan.getTrainSchedule();
         List<List<TrainStation>> allTrips = new ArrayList<>();
-        
+
         List<List<TrainStation>> currentTrips = new ArrayList<>();
         currentTrips.add(schedule.getTripWithStation(trainPlan.getStartStation()));
-        
+
         // find all the routes until all the trip is bigger than the length
-        while (currentTrips.size()>0) {
+        while (currentTrips.size() > 0) {
             List<List<TrainStation>> increasedTrips = new ArrayList<>();
             for (List<TrainStation> trip : currentTrips) {
                 List<List<TrainStation>> tempTrips = schedule.increaseTrip(trip);
-                for (List<TrainStation> tempTrip : tempTrips){
+                for (List<TrainStation> tempTrip : tempTrips) {
                     // only keep the trip little than the length
-                    if (schedule.getTripLength(tempTrip)<trainPlan.getRouteLength()){
+                    if (schedule.getTripLength(tempTrip) < trainPlan.getRouteLength()) {
                         increasedTrips.add(tempTrip);
-                    } 
+                    }
                 }
             }
             // add all the increased list, and use the list as the new start list
@@ -55,7 +55,7 @@ public class RoutesWithMaxLengthCalculator implements Calculator {
         }
 
         List<List<TrainStation>> resultList = allTrips.stream()
-                .filter( trip -> trip.get(trip.size()-1).equals(trainPlan.getEndStation()))
+                .filter(trip -> trip.get(trip.size() - 1).equals(trainPlan.getEndStation()))
                 .collect(Collectors.toList());
         return resultList.size();
     }

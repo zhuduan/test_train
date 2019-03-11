@@ -8,7 +8,7 @@ package com.zhuduan.train.bo.suggestion;
  * created at 3/8/19
  */
 public class Suggestion {
-    
+
     private int planId;
     private String message;     // the calculation result
 

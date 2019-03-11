@@ -8,7 +8,7 @@ import com.zhuduan.train.constant.ErrorCode;
  * @author Haifeng.Zhu
  * created at 3/11/19
  */
-public class ParamException extends Exception{
+public class ParamException extends Exception {
 
     public ParamException(ErrorCode errorCode) {
         super(errorCode.getMessage());

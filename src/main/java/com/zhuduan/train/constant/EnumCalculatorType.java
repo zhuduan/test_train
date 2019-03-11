@@ -10,7 +10,7 @@ public enum EnumCalculatorType {
     ROUTE_MIN(1, "routeMin"),
     ROUTE_LENGTH(2, "routeLen"),
     ROUTE_NUM(3, "routeNum");
-    
+
     private Integer id;
     private String name;
 

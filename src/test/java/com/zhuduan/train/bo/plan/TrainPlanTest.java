@@ -27,14 +27,14 @@ public class TrainPlanTest {
     @Before
     public void setUp() throws Exception {
         TrainSchedule schedule = TestUtil.getTestSchedule();
-        trainPlan = new TrainPlan(schedule, schedule.getStationByName("A"), schedule.getStationByName("C"), 
+        trainPlan = new TrainPlan(schedule, schedule.getStationByName("A"), schedule.getStationByName("C"),
                 EnumSuggestionType.POSSIBLE_TRIPS_EXACT_STOP);
     }
 
     @Test
     public void testIsValid() throws Exception {
         TrainSchedule schedule = TestUtil.getTestSchedule();
-        TrainPlan plan = new TrainPlan(schedule, null, schedule.getStationByName("C"), 
+        TrainPlan plan = new TrainPlan(schedule, null, schedule.getStationByName("C"),
                 EnumSuggestionType.POSSIBLE_TRIPS_EXACT_STOP);
         assertFalse(plan.isValid());
 
