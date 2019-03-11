@@ -12,7 +12,9 @@ public enum ErrorCode {
     ILLAGEL_TRAIN_PLAN(2, "Illegal train plan."),
     UNSUPPORTED_TRAIN_PLAN(3, "Not support this train plan."),
     INVALID_TRAIN_PLAN(4, "Invalid train plan."),
-    INVALID_ROUTE_INFO(5, "Invalid Route information.");
+    INVALID_ROUTE_INFO(5, "Invalid Route information."),
+    NOT_SUPPORT_TYPE(6, "Not support this type"),
+    INVALID_PARAMS(7, "Invalid params.");
     
     
     private Integer id;

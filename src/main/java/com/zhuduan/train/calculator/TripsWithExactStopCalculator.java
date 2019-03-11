@@ -2,6 +2,7 @@ package com.zhuduan.train.calculator;
 
 import com.zhuduan.train.bo.plan.StopsTrainPlan;
 import com.zhuduan.train.bo.station.TrainStation;
+import com.zhuduan.train.exception.DataException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,7 +10,7 @@ import java.util.stream.Collectors;
 public class TripsWithExactStopCalculator extends TripsWithStopCalculator {
 
     @Override
-    protected Integer getTrips(StopsTrainPlan plan) {
+    protected Integer getTrips(StopsTrainPlan plan) throws DataException {
         // get all passed route
         List<List<TrainStation>> trips = getAllTripsWithStop(plan);
 

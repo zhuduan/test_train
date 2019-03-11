@@ -66,7 +66,9 @@ public abstract class TrainSchedule {
      * @return
      */
     public Boolean isValid() {
-        if (adjacentMatrix == null) {
+        if (adjacentMatrix == null 
+                || adjacentMatrix.length == 0
+                || adjacentMatrix[0].length == 0) {
             return false;
         }
 

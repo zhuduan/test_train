@@ -43,7 +43,7 @@ public class TripsWithExactStopCalculatorTest {
         when(trainSchedule.isValid()).thenReturn(true);
 
         StopsTrainPlan stopsTrainPlan = new StopsTrainPlan(trainSchedule, stationA, stationB,
-                null, EnumSuggestionType.POSSIBLE_TRIPS_EXACT);
+                null, EnumSuggestionType.POSSIBLE_TRIPS_EXACT_STOP);
         Suggestion suggestion = calculator.getSuggestion(stopsTrainPlan);
         assertEquals(ErrorCode.INVALID_TRAIN_PLAN.getMessage(), suggestion.getMessage());
     }
@@ -58,7 +58,7 @@ public class TripsWithExactStopCalculatorTest {
         when(trainSchedule.isValid()).thenReturn(true);
 
         StopsTrainPlan stopsTrainPlan = new StopsTrainPlan(trainSchedule, stationA, stationB,
-                0, EnumSuggestionType.POSSIBLE_TRIPS_EXACT);
+                0, EnumSuggestionType.POSSIBLE_TRIPS_EXACT_STOP);
         Suggestion suggestion = calculator.getSuggestion(stopsTrainPlan);
         assertEquals(ErrorCode.INVALID_TRAIN_PLAN.getMessage(), suggestion.getMessage());
     }
@@ -73,25 +73,25 @@ public class TripsWithExactStopCalculatorTest {
         TrainStation stationC = new TrainStation(2, "C", "c");
 
         StopsTrainPlan stopsTrainPlan = new StopsTrainPlan(trainSchedule, stationA, stationB,
-                3, EnumSuggestionType.POSSIBLE_TRIPS_EXACT);
+                3, EnumSuggestionType.POSSIBLE_TRIPS_EXACT_STOP);
 
         Suggestion suggestion = calculator.getSuggestion(stopsTrainPlan);
         assertEquals(ErrorCode.INVALID_TRAIN_PLAN.getMessage(), suggestion.getMessage());
     }
 
     @Test
-    public void testGetAllTripsWithStop() {
+    public void testGetAllTripsWithStop() throws Exception{
         TrainSchedule schedule = TestUtil.getTestSchedule();
         
-        StopsTrainPlan trainPlan = new StopsTrainPlan(schedule, schedule.getStationByName("A"), schedule.getStationByName("C"), 1, EnumSuggestionType.POSSIBLE_ROUTE);
+        StopsTrainPlan trainPlan = new StopsTrainPlan(schedule, schedule.getStationByName("A"), schedule.getStationByName("C"), 1, EnumSuggestionType.POSSIBLE_TRIPS_MAX_LENGTH);
         List<List<TrainStation>> trips = calculator.getAllTripsWithStop(trainPlan);
         assertEquals(3, trips.size());
 
-        trainPlan = new StopsTrainPlan(schedule, schedule.getStationByName("A"), schedule.getStationByName("C"), 2, EnumSuggestionType.POSSIBLE_ROUTE);
+        trainPlan = new StopsTrainPlan(schedule, schedule.getStationByName("A"), schedule.getStationByName("C"), 2, EnumSuggestionType.POSSIBLE_TRIPS_MAX_LENGTH);
         trips = calculator.getAllTripsWithStop(trainPlan);
         assertEquals(7, trips.size());
 
-        trainPlan = new StopsTrainPlan(schedule, schedule.getStationByName("A"), schedule.getStationByName("C"), 3, EnumSuggestionType.POSSIBLE_ROUTE);
+        trainPlan = new StopsTrainPlan(schedule, schedule.getStationByName("A"), schedule.getStationByName("C"), 3, EnumSuggestionType.POSSIBLE_TRIPS_MAX_LENGTH);
         trips = calculator.getAllTripsWithStop(trainPlan);
         assertEquals(13, trips.size());
         assertEquals(schedule.getStationByName("A"), trips.get(trips.size()-1).get(0));
@@ -101,19 +101,27 @@ public class TripsWithExactStopCalculatorTest {
     }
 
     @Test
-    public void testGetTrips() {
+    public void testGetTrips() throws Exception {
         TrainSchedule schedule = TestUtil.getTestSchedule();
         
-        StopsTrainPlan trainPlan = new StopsTrainPlan(schedule, schedule.getStationByName("A"), schedule.getStationByName("C"), 4, EnumSuggestionType.POSSIBLE_TRIPS_EXACT);
+        StopsTrainPlan trainPlan = new StopsTrainPlan(schedule, schedule.getStationByName("A"), schedule.getStationByName("C"), 4, EnumSuggestionType.POSSIBLE_TRIPS_EXACT_STOP);
         Integer tripNum = calculator.getTrips(trainPlan);
         assertEquals(3, tripNum.intValue());
 
-        trainPlan = new StopsTrainPlan(schedule, schedule.getStationByName("A"), schedule.getStationByName("C"), 3, EnumSuggestionType.POSSIBLE_TRIPS_EXACT);
+        trainPlan = new StopsTrainPlan(schedule, schedule.getStationByName("A"), schedule.getStationByName("C"), 3, EnumSuggestionType.POSSIBLE_TRIPS_EXACT_STOP);
         tripNum = calculator.getTrips(trainPlan);
         assertEquals(1, tripNum.intValue());
 
-        trainPlan = new StopsTrainPlan(schedule, schedule.getStationByName("A"), schedule.getStationByName("D"), 3, EnumSuggestionType.POSSIBLE_TRIPS_EXACT);
+        trainPlan = new StopsTrainPlan(schedule, schedule.getStationByName("A"), schedule.getStationByName("D"), 3, EnumSuggestionType.POSSIBLE_TRIPS_EXACT_STOP);
         tripNum = calculator.getTrips(trainPlan);
         assertEquals(2, tripNum.intValue());
+    }
+
+    @Test
+    public void testGetSuggestion() throws Exception{
+        TrainSchedule schedule = TestUtil.getTestSchedule();
+
+        StopsTrainPlan trainPlan = new StopsTrainPlan(schedule, schedule.getStationByName("A"), schedule.getStationByName("C"), 4, EnumSuggestionType.POSSIBLE_TRIPS_EXACT_STOP);
+        assertEquals("3", calculator.getSuggestion(trainPlan).getMessage());
     }
 }

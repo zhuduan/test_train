@@ -3,6 +3,8 @@ package com.zhuduan.train;
 import com.zhuduan.train.bo.schedule.StringTrainSchedule;
 import com.zhuduan.train.bo.schedule.TrainSchedule;
 import com.zhuduan.train.bo.station.TrainStation;
+import com.zhuduan.train.constant.DefaultSetting;
+import com.zhuduan.train.util.UtilTool;
 
 import java.util.Arrays;
 
@@ -40,7 +42,27 @@ public class TestUtil {
         when(trainSchedule.getLengthBetween(stationC, stationE)).thenReturn(2);
         when(trainSchedule.getLengthBetween(stationE, stationB)).thenReturn(3);
         when(trainSchedule.getLengthBetween(stationA, stationE)).thenReturn(7);
-
+        
+        when(trainSchedule.getAdjacentMatrix()).thenReturn(getAdjacentMatrix());
+        
         return trainSchedule;
+    }
+    
+    private static Integer[][] getAdjacentMatrix(){
+        Integer[][] matrix = new Integer[5][5];
+        UtilTool.fillIntMatrix(matrix, DefaultSetting.UNREACHABLE);
+        
+        // initial data
+        matrix[0][1] = 5;
+        matrix[1][2] = 4;
+        matrix[2][3] = 8;
+        matrix[3][2] = 8;
+        matrix[3][4] = 6;
+        matrix[0][3] = 5;
+        matrix[2][4] = 2;
+        matrix[4][1] = 3;
+        matrix[0][4] = 7;
+        
+        return matrix;
     }
 }

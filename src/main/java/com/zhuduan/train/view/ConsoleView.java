@@ -1,5 +1,7 @@
 package com.zhuduan.train.view;
 
+import com.zhuduan.train.bo.suggestion.Suggestion;
+
 /**
  * render the result to console
  *
@@ -9,7 +11,7 @@ package com.zhuduan.train.view;
 public class ConsoleView implements View{
     
     @Override
-    public void render(String message) {
-        
+    public void render(Suggestion suggestion){
+        System.out.println(String.format("Output #%s: %s", suggestion.getPlanId(), suggestion.getMessage()));
     }
 }

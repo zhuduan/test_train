@@ -4,6 +4,7 @@ import com.zhuduan.train.constant.DefaultSetting;
 import com.zhuduan.train.constant.ErrorCode;
 import com.zhuduan.train.exception.DataException;
 import com.zhuduan.train.bo.station.TrainStation;
+import com.zhuduan.train.util.UtilTool;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -79,10 +80,6 @@ public class StringTrainSchedule extends TrainSchedule{
 
     private void initMatrix(){
         this.adjacentMatrix = new Integer[allStations.size()][allStations.size()];
-        for (int i=0; i<adjacentMatrix.length; i++){
-            for (int j=0; j<adjacentMatrix[i].length; j++){
-                adjacentMatrix[i][j] = DefaultSetting.UNREACHABLE;
-            }
-        }
+        UtilTool.fillIntMatrix(this.adjacentMatrix, DefaultSetting.UNREACHABLE);
     }
 }

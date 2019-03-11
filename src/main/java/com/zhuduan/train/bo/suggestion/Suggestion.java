@@ -9,6 +9,7 @@ package com.zhuduan.train.bo.suggestion;
  */
 public class Suggestion {
     
+    private int planId;
     private String message;     // the calculation result
 
     public Suggestion() {
@@ -24,5 +25,13 @@ public class Suggestion {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public int getPlanId() {
+        return planId;
+    }
+
+    public void setPlanId(int planId) {
+        this.planId = planId;
     }
 }

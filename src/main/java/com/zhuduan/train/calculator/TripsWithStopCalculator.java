@@ -5,6 +5,7 @@ import com.zhuduan.train.bo.plan.StopsTrainPlan;
 import com.zhuduan.train.bo.plan.TrainPlan;
 import com.zhuduan.train.bo.station.TrainStation;
 import com.zhuduan.train.bo.suggestion.Suggestion;
+import com.zhuduan.train.exception.DataException;
 
 import java.util.*;
 
@@ -19,13 +20,13 @@ public abstract class TripsWithStopCalculator implements Calculator{
             }
 
             Integer trips = getTrips(stopsTrainPlan);
-            new Suggestion(String.valueOf(trips));
+            return new Suggestion(String.valueOf(trips));
         }
         return new Suggestion(ErrorCode.ILLAGEL_TRAIN_PLAN.getMessage());
     }
     
     /* get all trips with stop number */
-    protected List<List<TrainStation>> getAllTripsWithStop(StopsTrainPlan trainPlan){
+    protected List<List<TrainStation>> getAllTripsWithStop(StopsTrainPlan trainPlan) throws DataException {
         List<List<TrainStation>> allTrips = new ArrayList<>();
         
         // get initial reachable route and add to the all trips
@@ -34,7 +35,6 @@ public abstract class TripsWithStopCalculator implements Calculator{
 
         // get all passed routes util stop end
         for (int i=0; i<trainPlan.getStopNumber(); i++) {
-            // merge list means the length increased list
             List<List<TrainStation>> increasedTrips = new ArrayList<>();
             for ( List<TrainStation> trip : currentTrips) {
                 increasedTrips.addAll(trainPlan.increaseTrip(trip));
@@ -52,5 +52,5 @@ public abstract class TripsWithStopCalculator implements Calculator{
      * @param trainPlan
      * @return
      */
-    protected abstract Integer getTrips(StopsTrainPlan trainPlan);
+    protected abstract Integer getTrips(StopsTrainPlan trainPlan) throws DataException ;
 }

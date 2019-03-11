@@ -5,6 +5,8 @@ import com.zhuduan.train.constant.DefaultSetting;
 import com.zhuduan.train.constant.EnumSuggestionType;
 import com.zhuduan.train.bo.schedule.TrainSchedule;
 import com.zhuduan.train.bo.station.TrainStation;
+import com.zhuduan.train.constant.ErrorCode;
+import com.zhuduan.train.exception.DataException;
 import com.zhuduan.train.util.UtilTool;
 
 import java.util.ArrayList;
@@ -18,6 +20,7 @@ import java.util.List;
  */
 public class TrainPlan {
 
+    private Integer id;
     private TrainSchedule trainSchedule;
     private TrainStation startStation;
     private TrainStation endStation;
@@ -51,9 +54,11 @@ public class TrainPlan {
      * 
      * @return
      */
-    public List<List<TrainStation>> getTripsWithAllStations(){
+    public List<List<TrainStation>> getTripsWithAllStations() throws DataException{
         List<List<TrainStation>> trips = new ArrayList<>();
-        trainSchedule.getAllStations().forEach( station -> trips.add(getTripWithStation(station)));
+        for (TrainStation trainStation : trainSchedule.getAllStations()){
+            trips.add(getTripWithStation(trainStation));
+        }
         return trips;
     }
 
@@ -62,8 +67,13 @@ public class TrainPlan {
      * 
      * @param start
      * @return
+     * @throws DataException
      */
-    public List<TrainStation> getTripWithStation(TrainStation start){
+    public List<TrainStation> getTripWithStation(TrainStation start) throws DataException{
+        if (start==null){
+            throw new DataException(ErrorCode.INVALID_ROUTE_INFO);
+        }
+        
         List<TrainStation> trip = new ArrayList<>();
         trip.add(start);
         return trip;
@@ -76,8 +86,13 @@ public class TrainPlan {
      * 
      * @param trip
      * @return trip list, means all the trip can start from current station to next station
+     * @throws DataException
      */
-    public List<List<TrainStation>> increaseTrip(List<TrainStation> trip){
+    public List<List<TrainStation>> increaseTrip(List<TrainStation> trip) throws DataException{
+        if (trip==null){
+            throw new DataException(ErrorCode.INVALID_ROUTE_INFO);
+        }
+        
         List<List<TrainStation>> increasedTrips = new ArrayList<>();
 
         TrainStation currentStation = trip.get(trip.size() - 1);
@@ -92,6 +107,25 @@ public class TrainPlan {
             }
         });
         return increasedTrips;
+    }
+
+    /****
+     * get the length of trip
+     * 
+     * @param trip
+     * @return
+     * @throws DataException
+     */
+    public Integer getTripLength(List<TrainStation> trip) throws DataException{
+        if (trip==null){
+            throw new DataException(ErrorCode.INVALID_ROUTE_INFO);
+        }
+        
+        Integer routeLength = 0;
+        for(int i=0; i<trip.size()-1; i++){
+            routeLength = routeLength + trainSchedule.getLengthBetween(trip.get(i), trip.get(i+1));
+        }
+        return routeLength;
     }
 
     public TrainSchedule getTrainSchedule() {
@@ -124,5 +158,13 @@ public class TrainPlan {
 
     public void setSuggestionType(EnumSuggestionType suggestionType) {
         this.suggestionType = suggestionType;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }
