@@ -7,6 +7,7 @@
     <groupId>com.zhuduan</groupId>
     <artifactId>test_train</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
     <properties>
         <maven.compiler.target>1.8</maven.compiler.target>

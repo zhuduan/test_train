@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
 public class StopsTrainPlanTest {
 
     @Test
-    public void testIsValidWhenZeroStop() {
+    public void testIsValidWhenZeroStop() throws Exception{
         TrainSchedule schedule = TestUtil.getTestSchedule();
         StopsTrainPlan stopsTrainPlan = new StopsTrainPlan(schedule, schedule.getStationByName("A"), 
                 schedule.getStationByName("B"), 0, EnumSuggestionType.POSSIBLE_TRIPS_EXACT_STOP);

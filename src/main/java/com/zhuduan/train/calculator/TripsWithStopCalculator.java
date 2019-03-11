@@ -1,5 +1,6 @@
 package com.zhuduan.train.calculator;
 
+import com.zhuduan.train.bo.schedule.TrainSchedule;
 import com.zhuduan.train.constant.ErrorCode;
 import com.zhuduan.train.bo.plan.StopsTrainPlan;
 import com.zhuduan.train.bo.plan.TrainPlan;
@@ -27,17 +28,18 @@ public abstract class TripsWithStopCalculator implements Calculator{
     
     /* get all trips with stop number */
     protected List<List<TrainStation>> getAllTripsWithStop(StopsTrainPlan trainPlan) throws DataException {
+        TrainSchedule schedule = trainPlan.getTrainSchedule();
         List<List<TrainStation>> allTrips = new ArrayList<>();
         
         // get initial reachable route and add to the all trips
         List<List<TrainStation>> currentTrips = new ArrayList<>();
-        currentTrips.add(trainPlan.getTripWithStation(trainPlan.getStartStation()));
+        currentTrips.add(schedule.getTripWithStation(trainPlan.getStartStation()));
 
         // get all passed routes util stop end
         for (int i=0; i<trainPlan.getStopNumber(); i++) {
             List<List<TrainStation>> increasedTrips = new ArrayList<>();
             for ( List<TrainStation> trip : currentTrips) {
-                increasedTrips.addAll(trainPlan.increaseTrip(trip));
+                increasedTrips.addAll(schedule.increaseTrip(trip));
             }
             // add all the increased list, and use the list as the new start list
             allTrips.addAll(increasedTrips);

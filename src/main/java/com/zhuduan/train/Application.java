@@ -1,6 +1,8 @@
 package com.zhuduan.train;
 
 import com.zhuduan.train.bo.plan.DirectRouteTrainPlan;
+import com.zhuduan.train.bo.plan.LengthTrainPlan;
+import com.zhuduan.train.bo.plan.StopsTrainPlan;
 import com.zhuduan.train.bo.plan.TrainPlan;
 import com.zhuduan.train.bo.schedule.ScheduleFactory;
 import com.zhuduan.train.bo.schedule.TrainSchedule;
@@ -82,16 +84,33 @@ public class Application {
         plan.setId(5);
         planList.add(plan);
         
-        // 6. 
+        // 6. CC, max 3 stops
+        plan = new StopsTrainPlan(schedule, schedule.getStationByName("C"), schedule.getStationByName("C"), 
+                3, EnumSuggestionType.POSSIBLE_TRIPS_MAX_STOP);
+        plan.setId(6);
+        planList.add(plan);
         
-        // 7.
+        // 7. AC, exact 4 stops
+        plan = new StopsTrainPlan(schedule, schedule.getStationByName("A"), schedule.getStationByName("C"),
+                4, EnumSuggestionType.POSSIBLE_TRIPS_EXACT_STOP);
+        plan.setId(7);
+        planList.add(plan);
         
-        // 8.
+        // 8. shortest AC
+        plan = new TrainPlan(schedule, schedule.getStationByName("A"), schedule.getStationByName("C"), EnumSuggestionType.MIN_ROUTE);
+        plan.setId(8);
+        planList.add(plan);
         
-        // 9.
+        // 9. shortest BB
+        plan = new TrainPlan(schedule, schedule.getStationByName("B"), schedule.getStationByName("B"), EnumSuggestionType.MIN_ROUTE);
+        plan.setId(9);
+        planList.add(plan);
         
-        //10.
-        
+        //10. CC, length 30
+        plan = new LengthTrainPlan(schedule, schedule.getStationByName("C"), schedule.getStationByName("C"), 
+                30, EnumSuggestionType.POSSIBLE_TRIPS_MAX_LENGTH);
+        plan.setId(10);
+        planList.add(plan);
         
         return planList;
     }

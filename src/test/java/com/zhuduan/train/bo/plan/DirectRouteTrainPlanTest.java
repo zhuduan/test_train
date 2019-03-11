@@ -21,7 +21,7 @@ import static org.junit.Assert.*;
 public class DirectRouteTrainPlanTest {
 
     @Test
-    public void isValid() {
+    public void isValid() throws Exception{
         TrainSchedule schedule = TestUtil.getTestSchedule();
         DirectRouteTrainPlan plan = new DirectRouteTrainPlan(schedule, schedule.getStationByName("A"),
                 schedule.getStationByName("B"), new ArrayList<>(), EnumSuggestionType.POSSIBLE_TRIPS_EXACT_STOP);

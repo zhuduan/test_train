@@ -3,6 +3,7 @@ package com.zhuduan.train.calculator;
 import com.zhuduan.train.bo.plan.LengthTrainPlan;
 import com.zhuduan.train.bo.plan.StopsTrainPlan;
 import com.zhuduan.train.bo.plan.TrainPlan;
+import com.zhuduan.train.bo.schedule.TrainSchedule;
 import com.zhuduan.train.bo.station.TrainStation;
 import com.zhuduan.train.bo.suggestion.Suggestion;
 import com.zhuduan.train.constant.ErrorCode;
@@ -30,19 +31,20 @@ public class RoutesWithMaxLengthCalculator implements Calculator {
     }
     
     private Integer getTrips(LengthTrainPlan trainPlan) throws DataException {
+        TrainSchedule schedule = trainPlan.getTrainSchedule();
         List<List<TrainStation>> allTrips = new ArrayList<>();
         
         List<List<TrainStation>> currentTrips = new ArrayList<>();
-        currentTrips.add(trainPlan.getTripWithStation(trainPlan.getStartStation()));
+        currentTrips.add(schedule.getTripWithStation(trainPlan.getStartStation()));
         
         // find all the routes until all the trip is bigger than the length
         while (currentTrips.size()>0) {
             List<List<TrainStation>> increasedTrips = new ArrayList<>();
             for (List<TrainStation> trip : currentTrips) {
-                List<List<TrainStation>> tempTrips = trainPlan.increaseTrip(trip);
+                List<List<TrainStation>> tempTrips = schedule.increaseTrip(trip);
                 for (List<TrainStation> tempTrip : tempTrips){
                     // only keep the trip little than the length
-                    if (trainPlan.getTripLength(tempTrip)<trainPlan.getRouteLength()){
+                    if (schedule.getTripLength(tempTrip)<trainPlan.getRouteLength()){
                         increasedTrips.add(tempTrip);
                     } 
                 }

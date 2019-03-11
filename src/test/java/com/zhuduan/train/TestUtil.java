@@ -4,9 +4,11 @@ import com.zhuduan.train.bo.schedule.StringTrainSchedule;
 import com.zhuduan.train.bo.schedule.TrainSchedule;
 import com.zhuduan.train.bo.station.TrainStation;
 import com.zhuduan.train.constant.DefaultSetting;
+import com.zhuduan.train.exception.DataException;
 import com.zhuduan.train.util.UtilTool;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
@@ -14,7 +16,7 @@ import static org.mockito.Mockito.when;
 
 public class TestUtil {
 
-    public static TrainSchedule getTestSchedule(){
+    public static TrainSchedule getTestSchedule() throws DataException {
         TrainStation stationA = new TrainStation(0, "A", "a");
         TrainStation stationB = new TrainStation(1, "B", "b");
         TrainStation stationC = new TrainStation(2, "C", "c");
@@ -44,6 +46,11 @@ public class TestUtil {
         when(trainSchedule.getLengthBetween(stationA, stationE)).thenReturn(7);
         
         when(trainSchedule.getAdjacentMatrix()).thenReturn(getAdjacentMatrix());
+        
+        when(trainSchedule.getTripLength(any(List.class))).thenCallRealMethod();
+        when(trainSchedule.getTripsWithAllStations()).thenCallRealMethod();
+        when(trainSchedule.getTripWithStation(any(TrainStation.class))).thenCallRealMethod();
+        when(trainSchedule.increaseTrip(any(List.class))).thenCallRealMethod();
         
         return trainSchedule;
     }
