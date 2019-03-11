@@ -1,7 +1,7 @@
 package com.zhuduan.train.calculator;
 
-import com.zhuduan.train.model.schedule.TrainSchedule;
-import com.zhuduan.train.model.station.TrainStation;
+import com.zhuduan.train.bo.plan.StopsTrainPlan;
+import com.zhuduan.train.bo.station.TrainStation;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,15 +9,14 @@ import java.util.stream.Collectors;
 public class TripsWithMaxStopCalculator extends TripsWithStopCalculator {
 
     @Override
-    protected Integer getTrips(TrainSchedule schedule, Integer stopNum,
-                               TrainStation startStation, TrainStation endStation) {
+    protected Integer getTrips(StopsTrainPlan trainPlan) {
         // get all passed route
-        List<List<TrainStation>> trips = getAllTripsWithStop(schedule, stopNum, startStation);
+        List<List<TrainStation>> trips = getAllTripsWithStop(trainPlan);
 
         // filter the result
         List<List<TrainStation>> result = trips.stream().filter( trip ->{
             TrainStation tripEnd = trip.get(trip.size() - 1);
-            return tripEnd.equals(endStation);
+            return tripEnd.equals(trainPlan.getEndStation());
         }).collect(Collectors.toList());
         return result.size();
     }

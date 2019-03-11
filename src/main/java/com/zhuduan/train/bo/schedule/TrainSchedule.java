@@ -1,9 +1,8 @@
-package com.zhuduan.train.model.schedule;
+package com.zhuduan.train.bo.schedule;
 
 import com.zhuduan.train.constant.DefaultSetting;
-import com.zhuduan.train.constant.ErrorCode;
 import com.zhuduan.train.exception.DataException;
-import com.zhuduan.train.model.station.TrainStation;
+import com.zhuduan.train.bo.station.TrainStation;
 
 import java.util.List;
 
@@ -77,7 +76,13 @@ public abstract class TrainSchedule {
         return true;
     }
 
-    // todo: getLengthBetween(String, String)
+    /***
+     * get length between two station
+     * 
+     * @param startIndex
+     * @param endIndex
+     * @return
+     */
     public Integer getLengthBetween(Integer startIndex, Integer endIndex) {
         if ( startIndex> adjacentMatrix.length || endIndex> adjacentMatrix[0].length){
             return DefaultSetting.UNREACHABLE;
@@ -85,10 +90,24 @@ public abstract class TrainSchedule {
         return adjacentMatrix[startIndex][endIndex];
     }
 
+    /***
+     * get length between two station
+     * 
+     * @param startStation
+     * @param endStation
+     * @return
+     */
     public Integer getLengthBetween(TrainStation startStation, TrainStation endStation) {
         return getLengthBetween(startStation.getIndex(), endStation.getIndex());
     }
 
+    /***
+     * get length between two station
+     * 
+     * @param startName
+     * @param endName
+     * @return
+     */
     public Integer getLengthBetween(String startName, String endName) {
         return getLengthBetween(getStationByName(startName), getStationByName(endName));
     }

@@ -1,4 +1,4 @@
-package com.zhuduan.train.model.suggestion;
+package com.zhuduan.train.bo.suggestion;
 
 
 /**

@@ -1,14 +1,12 @@
 package com.zhuduan.train;
 
-import com.zhuduan.train.constant.DefaultSetting;
-import com.zhuduan.train.model.schedule.StringTrainSchedule;
-import com.zhuduan.train.model.schedule.TrainSchedule;
-import com.zhuduan.train.model.station.TrainStation;
+import com.zhuduan.train.bo.schedule.StringTrainSchedule;
+import com.zhuduan.train.bo.schedule.TrainSchedule;
+import com.zhuduan.train.bo.station.TrainStation;
 
 import java.util.Arrays;
 
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 

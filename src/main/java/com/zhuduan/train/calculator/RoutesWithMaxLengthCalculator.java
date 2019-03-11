@@ -1,7 +1,7 @@
 package com.zhuduan.train.calculator;
 
-import com.zhuduan.train.model.plan.TrainPlan;
-import com.zhuduan.train.model.suggestion.Suggestion;
+import com.zhuduan.train.bo.plan.TrainPlan;
+import com.zhuduan.train.bo.suggestion.Suggestion;
 
 public class RoutesWithMaxLengthCalculator implements Calculator {
 
@@ -9,4 +9,6 @@ public class RoutesWithMaxLengthCalculator implements Calculator {
     public Suggestion getSuggestion(TrainPlan trainPlan) throws Exception {
         return null;
     }
+    
+    
 }

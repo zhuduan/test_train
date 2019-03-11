@@ -1,4 +1,4 @@
-package com.zhuduan.train.model.schedule;
+package com.zhuduan.train.bo.schedule;
 
 import com.zhuduan.train.exception.DataException;
 

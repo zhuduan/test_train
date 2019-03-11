@@ -1,7 +1,7 @@
 package com.zhuduan.train.calculator;
 
-import com.zhuduan.train.model.plan.TrainPlan;
-import com.zhuduan.train.model.suggestion.Suggestion;
+import com.zhuduan.train.bo.plan.TrainPlan;
+import com.zhuduan.train.bo.suggestion.Suggestion;
 
 /**
  * the calculator to get the suggestion from the Train Plan

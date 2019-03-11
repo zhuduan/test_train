@@ -1,6 +1,4 @@
-package com.zhuduan.train.model.station;
-
-import com.zhuduan.train.util.UtilTool;
+package com.zhuduan.train.bo.station;
 
 public class TrainStation {
 

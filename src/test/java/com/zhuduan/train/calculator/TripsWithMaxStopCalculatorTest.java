@@ -1,7 +1,9 @@
 package com.zhuduan.train.calculator;
 
 import com.zhuduan.train.TestUtil;
-import com.zhuduan.train.model.schedule.TrainSchedule;
+import com.zhuduan.train.constant.EnumSuggestionType;
+import com.zhuduan.train.bo.plan.StopsTrainPlan;
+import com.zhuduan.train.bo.schedule.TrainSchedule;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -26,13 +28,16 @@ public class TripsWithMaxStopCalculatorTest {
     public void getTrips() {
         TrainSchedule schedule = TestUtil.getTestSchedule();
 
-        Integer tripNum = calculator.getTrips(schedule, 3, schedule.getStationByName("C"), schedule.getStationByName("C"));
+        StopsTrainPlan trainPlan = new StopsTrainPlan(schedule, schedule.getStationByName("C"), schedule.getStationByName("C"), 3, EnumSuggestionType.POSSIBLE_TRIPS_MAX);
+        Integer tripNum = calculator.getTrips(trainPlan);
         assertEquals(2, tripNum.intValue());
 
-        tripNum = calculator.getTrips(schedule, 3, schedule.getStationByName("A"), schedule.getStationByName("C"));
+        trainPlan = new StopsTrainPlan(schedule, schedule.getStationByName("A"), schedule.getStationByName("C"), 3, EnumSuggestionType.POSSIBLE_TRIPS_MAX);
+        tripNum = calculator.getTrips(trainPlan);
         assertEquals(3, tripNum.intValue());
 
-        tripNum = calculator.getTrips(schedule, 3, schedule.getStationByName("A"), schedule.getStationByName("B"));
+        trainPlan = new StopsTrainPlan(schedule, schedule.getStationByName("A"), schedule.getStationByName("B"), 3, EnumSuggestionType.POSSIBLE_TRIPS_MAX);
+        tripNum = calculator.getTrips(trainPlan);
         assertEquals(3, tripNum.intValue());
     }
 }

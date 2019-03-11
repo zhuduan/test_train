@@ -2,11 +2,11 @@ package com.zhuduan.train.calculator;
 
 import com.zhuduan.train.constant.DefaultSetting;
 import com.zhuduan.train.constant.ErrorCode;
-import com.zhuduan.train.model.plan.DirectRouteTrainPlan;
-import com.zhuduan.train.model.plan.TrainPlan;
-import com.zhuduan.train.model.schedule.StringTrainSchedule;
-import com.zhuduan.train.model.station.TrainStation;
-import com.zhuduan.train.model.suggestion.Suggestion;
+import com.zhuduan.train.bo.plan.DirectRouteTrainPlan;
+import com.zhuduan.train.bo.plan.TrainPlan;
+import com.zhuduan.train.bo.schedule.StringTrainSchedule;
+import com.zhuduan.train.bo.station.TrainStation;
+import com.zhuduan.train.bo.suggestion.Suggestion;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

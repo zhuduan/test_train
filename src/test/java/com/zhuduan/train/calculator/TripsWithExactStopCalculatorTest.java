@@ -3,18 +3,15 @@ package com.zhuduan.train.calculator;
 import com.zhuduan.train.TestUtil;
 import com.zhuduan.train.constant.EnumSuggestionType;
 import com.zhuduan.train.constant.ErrorCode;
-import com.zhuduan.train.model.plan.DirectRouteTrainPlan;
-import com.zhuduan.train.model.plan.StopsTrainPlan;
-import com.zhuduan.train.model.plan.TrainPlan;
-import com.zhuduan.train.model.schedule.StringTrainSchedule;
-import com.zhuduan.train.model.schedule.TrainSchedule;
-import com.zhuduan.train.model.station.TrainStation;
-import com.zhuduan.train.model.suggestion.Suggestion;
+import com.zhuduan.train.bo.plan.StopsTrainPlan;
+import com.zhuduan.train.bo.plan.TrainPlan;
+import com.zhuduan.train.bo.schedule.StringTrainSchedule;
+import com.zhuduan.train.bo.schedule.TrainSchedule;
+import com.zhuduan.train.bo.station.TrainStation;
+import com.zhuduan.train.bo.suggestion.Suggestion;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -86,13 +83,16 @@ public class TripsWithExactStopCalculatorTest {
     public void testGetAllTripsWithStop() {
         TrainSchedule schedule = TestUtil.getTestSchedule();
         
-        List<List<TrainStation>> trips = calculator.getAllTripsWithStop(schedule, 1, schedule.getStationByName("A"));
+        StopsTrainPlan trainPlan = new StopsTrainPlan(schedule, schedule.getStationByName("A"), schedule.getStationByName("C"), 1, EnumSuggestionType.POSSIBLE_ROUTE);
+        List<List<TrainStation>> trips = calculator.getAllTripsWithStop(trainPlan);
         assertEquals(3, trips.size());
 
-        trips = calculator.getAllTripsWithStop(schedule, 2, schedule.getStationByName("A"));
+        trainPlan = new StopsTrainPlan(schedule, schedule.getStationByName("A"), schedule.getStationByName("C"), 2, EnumSuggestionType.POSSIBLE_ROUTE);
+        trips = calculator.getAllTripsWithStop(trainPlan);
         assertEquals(7, trips.size());
 
-        trips = calculator.getAllTripsWithStop(schedule, 3, schedule.getStationByName("A"));
+        trainPlan = new StopsTrainPlan(schedule, schedule.getStationByName("A"), schedule.getStationByName("C"), 3, EnumSuggestionType.POSSIBLE_ROUTE);
+        trips = calculator.getAllTripsWithStop(trainPlan);
         assertEquals(13, trips.size());
         assertEquals(schedule.getStationByName("A"), trips.get(trips.size()-1).get(0));
         assertEquals(schedule.getStationByName("E"), trips.get(trips.size()-1).get(1));
@@ -104,13 +104,16 @@ public class TripsWithExactStopCalculatorTest {
     public void testGetTrips() {
         TrainSchedule schedule = TestUtil.getTestSchedule();
         
-        Integer tripNum = calculator.getTrips(schedule, 4, schedule.getStationByName("A"), schedule.getStationByName("C"));
+        StopsTrainPlan trainPlan = new StopsTrainPlan(schedule, schedule.getStationByName("A"), schedule.getStationByName("C"), 4, EnumSuggestionType.POSSIBLE_TRIPS_EXACT);
+        Integer tripNum = calculator.getTrips(trainPlan);
         assertEquals(3, tripNum.intValue());
 
-        tripNum = calculator.getTrips(schedule, 3, schedule.getStationByName("A"), schedule.getStationByName("C"));
+        trainPlan = new StopsTrainPlan(schedule, schedule.getStationByName("A"), schedule.getStationByName("C"), 3, EnumSuggestionType.POSSIBLE_TRIPS_EXACT);
+        tripNum = calculator.getTrips(trainPlan);
         assertEquals(1, tripNum.intValue());
 
-        tripNum = calculator.getTrips(schedule, 3, schedule.getStationByName("A"), schedule.getStationByName("D"));
+        trainPlan = new StopsTrainPlan(schedule, schedule.getStationByName("A"), schedule.getStationByName("D"), 3, EnumSuggestionType.POSSIBLE_TRIPS_EXACT);
+        tripNum = calculator.getTrips(trainPlan);
         assertEquals(2, tripNum.intValue());
     }
 }

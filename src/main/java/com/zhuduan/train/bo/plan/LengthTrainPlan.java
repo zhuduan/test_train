@@ -1,8 +1,8 @@
-package com.zhuduan.train.model.plan;
+package com.zhuduan.train.bo.plan;
 
 import com.zhuduan.train.constant.EnumSuggestionType;
-import com.zhuduan.train.model.schedule.TrainSchedule;
-import com.zhuduan.train.model.station.TrainStation;
+import com.zhuduan.train.bo.schedule.TrainSchedule;
+import com.zhuduan.train.bo.station.TrainStation;
 import com.zhuduan.train.util.UtilTool;
 
 public class LengthTrainPlan extends TrainPlan {
