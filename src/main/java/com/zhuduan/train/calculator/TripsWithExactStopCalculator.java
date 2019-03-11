@@ -12,7 +12,7 @@ public class TripsWithExactStopCalculator extends TripsWithStopCalculator {
     protected Integer getTrips(TrainSchedule schedule, Integer stopNum,
                                TrainStation startStation, TrainStation endStation) {
         // get all passed route
-        List<List<TrainStation>> trips = getAllTripsWithStop(schedule, stopNum, startStation, endStation);
+        List<List<TrainStation>> trips = getAllTripsWithStop(schedule, stopNum, startStation);
 
         // filter the ones due to condition
         List<List<TrainStation>> result = trips.stream().filter( trip -> {

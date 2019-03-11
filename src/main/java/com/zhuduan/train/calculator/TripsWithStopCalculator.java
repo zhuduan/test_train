@@ -41,24 +41,28 @@ public abstract class TripsWithStopCalculator implements Calculator{
                                         TrainStation startStation, TrainStation endStation);
 
     /* get all trips with stop number */
-    protected List<List<TrainStation>> getAllTripsWithStop(TrainSchedule schedule, Integer stopNum,
-                                                           TrainStation startStation, TrainStation endStation){
-        // get initial reachable route
-        List<List<TrainStation>> trips = addNextReachableStation(schedule, startStation);
+    protected List<List<TrainStation>> getAllTripsWithStop(TrainSchedule schedule, Integer stopNum, 
+                                                           TrainStation startStation){
+        // get initial reachable route and add to the all trips
+        List<List<TrainStation>> existTrips = addNextReachableStation(schedule, startStation);
+        List<List<TrainStation>> allTrips = new ArrayList<>();
+        allTrips.addAll(existTrips);
 
-        // get all passed routes util step end
+        // get all passed routes util stop end
         // notice as the first route generated above, should start at index 1
         for (int i=1; i<stopNum; i++) {
-            List<List<TrainStation>> mergedTrips = new ArrayList<>();
-            for ( List<TrainStation> trip : trips) {
+            // merge list means the length increased list
+            List<List<TrainStation>> increasedTrips = new ArrayList<>();
+            for ( List<TrainStation> trip : existTrips) {
                 TrainStation newStartStation = trip.get(trip.size() - 1);
                 List<List<TrainStation>> newTrips = addNextReachableStation(schedule, newStartStation);
-                mergedTrips.addAll(mergeTwoTrip(trips, newTrips));
+                increasedTrips.addAll(increaseTrip(trip, newTrips));
             }
-            trips.addAll(mergedTrips);
-            trips = removeDuplicate(trips);
+            // add all the increased list, and use the list as the new start list
+            allTrips.addAll(increasedTrips);
+            existTrips = increasedTrips;
         }
-        return trips;
+        return allTrips;
     }
 
     private List<List<TrainStation>> addNextReachableStation(TrainSchedule schedule, TrainStation start){
@@ -76,23 +80,23 @@ public abstract class TripsWithStopCalculator implements Calculator{
         return trips;
     }
 
-    /* merge if the second's start is the first's end */
-    private List<List<TrainStation>> mergeTwoTrip(List<List<TrainStation>> firstTrips,
-                                                  List<List<TrainStation>> secondTrips){
-        List<List<TrainStation>> mergedTrips = new ArrayList<>();
-        firstTrips.forEach( firstTrip -> {
-            TrainStation firstEndStation = firstTrip.get(firstTrip.size() - 1);
-            secondTrips.forEach( secondTrip -> {
-                TrainStation secondStartStation = secondTrip.get(0);
-                if (secondStartStation.equals(firstEndStation)){
-                    List<TrainStation> newTrip = new ArrayList<>();
-                    newTrip.addAll(firstTrip);
-                    newTrip.addAll(secondTrip.subList(1, secondTrip.size()));
-                    mergedTrips.add(newTrip);
-                }
-            });
+    /* increase if the second's start is the first's end 
+       (notice the route may be split as the next station may more than 1) */
+    private List<List<TrainStation>> increaseTrip(List<TrainStation> trip, List<List<TrainStation>> newTrips){
+        List<List<TrainStation>> increasedTrip = new ArrayList<>();
+        
+        TrainStation tripEnd = trip.get(trip.size() -1);
+        newTrips.forEach( newTrip ->{
+            TrainStation newTripStart = newTrip.get(0);
+            if (tripEnd.equals(newTripStart)){
+                List<TrainStation> newTip = new ArrayList<>();
+                newTip.addAll(trip);
+                newTip.addAll(newTrip.subList(1, newTrip.size()));
+                
+                increasedTrip.add(newTip);
+            }
         });
-        return mergedTrips;
+        return increasedTrip;
     }
 
     private List<List<TrainStation>> removeDuplicate(List<List<TrainStation>> trips){

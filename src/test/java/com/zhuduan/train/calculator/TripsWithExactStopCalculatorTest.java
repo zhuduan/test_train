@@ -85,23 +85,32 @@ public class TripsWithExactStopCalculatorTest {
     @Test
     public void testGetAllTripsWithStop() {
         TrainSchedule schedule = TestUtil.getTestSchedule();
-        List<List<TrainStation>> trips = calculator.getAllTripsWithStop(schedule, 4,
-                schedule.getStationByName("A"), schedule.getStationByName("C"));
+        
+        List<List<TrainStation>> trips = calculator.getAllTripsWithStop(schedule, 1, schedule.getStationByName("A"));
+        assertEquals(3, trips.size());
 
-        trips.stream().filter( trip -> (trip.size()==5 && trip.get(trip.size()-1).isSameByName("C") ) )
-                .forEach( trip -> {
-                    StringBuilder stringBuilder = new StringBuilder();
-                    trip.forEach( station -> stringBuilder.append(station.getName()).append("->") );
-                    System.out.println(stringBuilder.toString());
-        });
+        trips = calculator.getAllTripsWithStop(schedule, 2, schedule.getStationByName("A"));
+        assertEquals(7, trips.size());
+
+        trips = calculator.getAllTripsWithStop(schedule, 3, schedule.getStationByName("A"));
+        assertEquals(13, trips.size());
+        assertEquals(schedule.getStationByName("A"), trips.get(trips.size()-1).get(0));
+        assertEquals(schedule.getStationByName("E"), trips.get(trips.size()-1).get(1));
+        assertEquals(schedule.getStationByName("B"), trips.get(trips.size()-1).get(2));
+        assertEquals(schedule.getStationByName("C"), trips.get(trips.size()-1).get(3));
     }
 
     @Test
     public void testGetTrips() {
         TrainSchedule schedule = TestUtil.getTestSchedule();
-        Integer tripNum = calculator.getTrips(schedule, 4,
-                schedule.getStationByName("A"), schedule.getStationByName("C"));
+        
+        Integer tripNum = calculator.getTrips(schedule, 4, schedule.getStationByName("A"), schedule.getStationByName("C"));
         assertEquals(3, tripNum.intValue());
 
+        tripNum = calculator.getTrips(schedule, 3, schedule.getStationByName("A"), schedule.getStationByName("C"));
+        assertEquals(1, tripNum.intValue());
+
+        tripNum = calculator.getTrips(schedule, 3, schedule.getStationByName("A"), schedule.getStationByName("D"));
+        assertEquals(2, tripNum.intValue());
     }
 }
